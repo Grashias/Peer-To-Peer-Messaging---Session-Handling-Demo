@@ -1,0 +1,100 @@
+<html>
+<head>
+</head>
+<body>
+	<div style="font-weight: bold; text-align: center;"><label> PEER TO PEER MESSAGING DEMO </label><br><br><br><br></div>
+	<input id="peerObject" type="textbox" placeholder="PeerID"><br>
+	<input id="createPeerObject" type="submit" value="CreatePeerID"><br><br><br><br>
+	<input id="receiverID" type="textbox" placeholder="ReceiverID"><br>
+	<input id="messageObject" type="textbox" placeholder="Message"><br>
+	<input id="sendMessageToPeer" type="submit" value="SendMessageToPeer"><br><br>
+	<textarea id="messagesTxtArea" name="comment" style="margin: 0px; width: 586px; height: 116px;"></textarea><br><br><br><br>
+	<input id="activeNodes" type="submit" value="ActiveNodes">
+	<textarea id="nodesObject" name="comment" style="margin: 0px; width: 586px; height: 116px;"></textarea>
+	<input id="sessionNodes1h" type="submit" value="Sessionpast1hour">
+	<textarea id="nodesObject1h" name="comment" style="margin: 0px; width: 586px; height: 116px;"></textarea>
+	<input id="sessionNodes2h" type="submit" value="SessionPast2hours">
+	<textarea id="nodesObject2h" name="comment" style="margin: 0px; width: 586px; height: 116px;"></textarea>
+	<input id="sessionNodes1d" type="submit" value="SessionPast1day">
+	<textarea id="nodesObject1d" name="comment" style="margin: 0px; width: 586px; height: 116px;"></textarea>
+	
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="peer.min.js"></script>
+
+<script>
+
+$(document).ready(function() {
+	var peer;
+	$("#createPeerObject").click(function() {
+		var peerID = $("#peerObject").val();
+		peer = new Peer(peerID, {host: 'localhost', port: 9000, path: '/api', debug: '1'});
+		peer.on('open', function(id) {
+			console.log('My peer ID is: ' + id);
+			peer.on('connection', function(conn) { 
+				console.log(conn);
+				// receive message
+				conn.on('data', function(data) {
+					console.log('Received from ' + conn.peer + " : " + data);
+					$("#messagesTxtArea").append(conn.peer + " : " + data + "\n");
+				});
+			});
+		});
+	});
+	
+	$("#sendMessageToPeer").click(function() {
+		var receiverID = $("#receiverID").val();
+		var message = $("#messageObject").val();
+		
+		var conn = peer.connect(receiverID);
+		conn.on('open', function() {
+		  // Send message
+		  conn.send(message);
+		  $("#messagesTxtArea").append("You : " + message + "\n");
+		});
+	});	
+	
+	$("#activeNodes").click(function() {	
+		$.get("http://localhost:9000/activeNodes", function(data,status){
+			console.log(data);
+			$("#nodesObject").val(data);
+        });
+	});	
+	
+	$("#sessionNodes1h").click(function() {	
+		var startTime = Math.round((new Date()).getTime() / 1000);
+		var endTime = startTime - 3600;
+		console.log(startTime,endTime);
+		$.post("http://localhost:9000/sessionNodes", {startTime: startTime, endTime: endTime}, function(data,status){
+			var stringData = data.toString().replace(/,/g, "\n")
+			console.log(stringData);
+			$("#nodesObject1h").val(stringData);
+        });
+	});	
+	
+	$("#sessionNodes2h").click(function() {	
+		var startTime = Math.round((new Date()).getTime() / 1000);
+		var endTime = startTime - 7200;
+		console.log(startTime,endTime);
+		$.post("http://localhost:9000/sessionNodes", {startTime: startTime, endTime: endTime}, function(data,status){
+			var stringData = data.toString().replace(/,/g, "\n")
+			console.log(stringData);
+			$("#nodesObject2h").val(stringData);
+        });
+	});
+	
+	$("#sessionNodes1d").click(function() {	
+		var startTime = Math.round((new Date()).getTime() / 1000);
+		var endTime = startTime - 86400;
+		console.log(startTime,endTime);
+		$.post("http://localhost:9000/sessionNodes", {startTime: startTime, endTime: endTime}, function(data,status){
+			var stringData = data.toString().replace(/,/g, "\n")
+			console.log(stringData);
+			$("#nodesObject1d").val(stringData);
+        });
+	});
+});	
+
+</script>
+</body>
+</html>
