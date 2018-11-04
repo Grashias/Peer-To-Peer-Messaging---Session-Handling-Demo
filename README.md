@@ -1,4 +1,4 @@
-# peer to peer messaging and session handling demo
+# Peer to peer messaging and session handling demo
 
 I have attached with all the dependency files, server file and html file for live demo.
 
