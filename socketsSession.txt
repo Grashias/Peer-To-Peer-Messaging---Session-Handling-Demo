@@ -1,6 +1,1 @@
-1541264225 - Sun Nov 04 2018 00:57:05 GMT+0800 (Malay Peninsula Standard Time) - Opened socket ID : a
-1541264248 - Sun Nov 04 2018 00:57:27 GMT+0800 (Malay Peninsula Standard Time) - Opened socket ID : b
-1541264253 - Sun Nov 04 2018 00:57:32 GMT+0800 (Malay Peninsula Standard Time) - Closed socket ID : b
-1541264305 - Sun Nov 04 2018 00:58:25 GMT+0800 (Malay Peninsula Standard Time) - Opened socket ID : b
-1541264392 - Sun Nov 04 2018 00:59:52 GMT+0800 (Malay Peninsula Standard Time) - Closed socket ID : b
-1541264398 - Sun Nov 04 2018 00:59:58 GMT+0800 (Malay Peninsula Standard Time) - Closed socket ID : a
+
