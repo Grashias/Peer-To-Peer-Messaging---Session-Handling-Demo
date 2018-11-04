@@ -5,7 +5,7 @@ I have attached with all the dependency files, server file and html file for liv
 I have used PeerJS server and peer client to achieve the peer to peer messaging demo.
 
 
-#Dependencies
+# Dependencies
 
 1. NodeJS 
 2. PM2 (if running in cluster mode)
@@ -13,7 +13,7 @@ I have used PeerJS server and peer client to achieve the peer to peer messaging 
 
 
 
-#Setup for the demo
+# Setup for the demo
 
 1. Unzip the archived file.
 
@@ -29,7 +29,7 @@ I have used PeerJS server and peer client to achieve the peer to peer messaging 
 
 
 
-#Steps to run through the demo 
+# Steps to run through the demo 
 
 1. Initially create a peer object with any string value(User Name) which will be the unique peer ID, which will create a peer object and will open socket connection to the peerJS server.
 
@@ -53,7 +53,7 @@ I have used PeerJS server and peer client to achieve the peer to peer messaging 
 
 ----------------------------
 
-For further queries reach me out.
+# For further queries reach me out.
 
 grashias14@gmail.com
 
