@@ -33,7 +33,7 @@ I have used PeerJS server and peer client to achieve the peer to peer messaging 
 
 1. Initially create a peer object with any string value(User Name) which will be the unique peer ID, which will create a peer object and will open socket connection to the peerJS server.
 
-2. For testing open the peerConnectionDemo.html in other browser and follow thw step 1.
+2. For testing open the peerConnectionDemo.html in other browser and follow the step 1.
 
 3. Now you are ready to message between the peers.
 
